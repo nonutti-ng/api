@@ -1,7 +1,7 @@
 import { MySql2Database } from 'drizzle-orm/mysql2';
-import * as schema from '../schema';
+import * as schema from '../schema.js';
 import { eq, and } from 'drizzle-orm';
-import Entries from './entries';
+import Entries from './entries.js';
 
 export default class Tries {
     db: MySql2Database<typeof schema>;

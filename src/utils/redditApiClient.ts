@@ -1,6 +1,6 @@
-import Database from '../db';
-import { env } from './env';
-import logger from './logger';
+import Database from '../db/index.js';
+import { env } from './env.js';
+import logger from './logger.js';
 
 interface RedditTokenResponse {
     access_token: string;
@@ -65,18 +65,21 @@ export class RedditApiClient {
             `${env!.REDDIT_CLIENT_ID}:${env!.REDDIT_CLIENT_SECRET}`,
         ).toString('base64');
 
-        const response = await fetch('https://www.reddit.com/api/v1/access_token', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Basic ${auth}`,
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'User-Agent': 'nnn-api/1.0.0',
+        const response = await fetch(
+            'https://www.reddit.com/api/v1/access_token',
+            {
+                method: 'POST',
+                headers: {
+                    Authorization: `Basic ${auth}`,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'User-Agent': 'nnn-api/1.0.0',
+                },
+                body: new URLSearchParams({
+                    grant_type: 'refresh_token',
+                    refresh_token: this.refreshToken,
+                }),
             },
-            body: new URLSearchParams({
-                grant_type: 'refresh_token',
-                refresh_token: this.refreshToken,
-            }),
-        });
+        );
 
         if (!response.ok) {
             const errorText = await response.text();
@@ -123,7 +126,9 @@ export class RedditApiClient {
             !this.accessTokenExpiresAt ||
             this.accessTokenExpiresAt <= expiryThreshold
         ) {
-            logger.info('Access token expired or about to expire, refreshing...');
+            logger.info(
+                'Access token expired or about to expire, refreshing...',
+            );
             await this.refreshAccessToken();
         }
     }

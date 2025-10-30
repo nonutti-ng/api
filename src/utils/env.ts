@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { z } from 'zod';
-import logger from './logger';
+import logger from './logger.js';
 
 const envSchema = z.object({
     PORT: z

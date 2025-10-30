@@ -1,8 +1,8 @@
-import { validateJson } from '../../middlewares/validation';
-import { UsersOnboardingDoneRequest } from '../../schemas/users';
-import { createRouter } from '../../utils';
-import { APIErrors } from '../../utils/apiErrors';
-import { createRedditClient } from '../../utils/redditApiClient';
+import { validateJson } from '../../middlewares/validation.js';
+import { UsersOnboardingDoneRequest } from '../../schemas/users.js';
+import { createRouter } from '../../utils/index.js';
+import { APIErrors } from '../../utils/apiErrors.js';
+import { createRedditClient } from '../../utils/redditApiClient.js';
 
 const usersRouter = createRouter(true);
 

@@ -1,7 +1,7 @@
-import { validateJson } from '../../middlewares/validation';
-import { LogDailyTryRequest } from '../../schemas/tries';
-import { createRouter } from '../../utils';
-import { APIErrors } from '../../utils/apiErrors';
+import { validateJson } from '../../middlewares/validation.js';
+import { LogDailyTryRequest } from '../../schemas/tries.js';
+import { createRouter } from '../../utils/index.js';
+import { APIErrors } from '../../utils/apiErrors.js';
 
 const triesRouter = createRouter(true);
 

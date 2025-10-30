@@ -1,15 +1,15 @@
 import { Hono } from 'hono';
-import { auth } from './utils/auth';
+import { auth } from './utils/auth.js';
 import { serve } from '@hono/node-server';
 import { cors } from 'hono/cors';
-import { env } from './utils/env';
-import logger from './utils/logger';
+import { env } from './utils/env.js';
+import logger from './utils/logger.js';
 import { logger as honoLogger } from 'hono/logger';
 import { AppContext } from './types/honoTypes';
-import { apiMainRouter } from './routes';
+import { apiMainRouter } from './routes/index.js';
 import { ID } from 'id';
-import Database from './db';
-import { customLogger } from './middlewares/logger';
+import Database from './db/index.js';
+import { customLogger } from './middlewares/logger.js';
 const app = new Hono<AppContext>();
 const db = new Database();
 const idGen = new ID({

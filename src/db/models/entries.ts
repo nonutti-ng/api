@@ -1,5 +1,5 @@
 import { MySql2Database } from 'drizzle-orm/mysql2';
-import * as schema from '../schema';
+import * as schema from '../schema.js';
 import { eq, and, inArray, gt } from 'drizzle-orm';
 
 export default class Entries {
