@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1761685510401,
+      "tag": "0000_happy_warstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1761771961213,
+      "tag": "0001_low_maginty",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1761781929266,
+      "tag": "0002_woozy_proteus",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1761787998867,
+      "tag": "0003_spooky_morg",
+      "breakpoints": true
+    }
+  ]
+}
