@@ -7,6 +7,7 @@ import { oAuthProxy } from 'better-auth/plugins';
 export const auth = betterAuth({
     secret: env.BETTER_AUTH_SECRET,
     url: env.FRONTEND_URL,
+    baseURL: env.API_URL,
     trustedOrigins: [env.FRONTEND_URL!],
     plugins: [oAuthProxy()],
     database: drizzleAdapter(rawDb, {
