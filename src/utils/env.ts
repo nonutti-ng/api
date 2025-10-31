@@ -15,6 +15,7 @@ const envSchema = z.object({
         .default(3306),
     BETTER_AUTH_SECRET: z.string(),
     FRONTEND_URL: z.url(),
+    API_URL: z.url(),
     DISCORD_CLIENT_ID: z.string(),
     DISCORD_CLIENT_SECRET: z.string(),
     REDDIT_CLIENT_ID: z.string(),
