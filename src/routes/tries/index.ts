@@ -20,9 +20,6 @@ triesRouter.post('/me/log', validateJson(LogDailyTryRequest), async (c) => {
     }
 
     const tryId = userTries[0].tryId;
-
-    // Generate a UUID for the entry
-    const entryId = (await idGen.generateUUID()).id;
     const dateToUse = date !== undefined ? new Date(date) : new Date();
 
     // The date cannot be in the future
@@ -56,6 +53,9 @@ triesRouter.post('/me/log', validateJson(LogDailyTryRequest), async (c) => {
         await db.entries.deleteAllEntriesAfterDate(user!.id, dateToUse);
         await db.tries.failTry(tryId);
     }
+
+    // Generate a UUID for the entry
+    const entryId = (await idGen.generateUUID()).id;
 
     // Create the entry
     await db.entries.addEntryToTry({
