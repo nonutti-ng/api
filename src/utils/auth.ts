@@ -8,9 +8,7 @@ export const auth = betterAuth({
     secret: env.BETTER_AUTH_SECRET,
     url: env.FRONTEND_URL,
     baseURL: env.API_URL,
-    basePath: '/api/auth',
     trustedOrigins: [env.FRONTEND_URL!],
-    plugins: [oAuthProxy()],
     database: drizzleAdapter(rawDb, {
         provider: 'mysql',
         schema: {
@@ -28,13 +26,11 @@ export const auth = betterAuth({
             clientId: env.DISCORD_CLIENT_ID!,
             clientSecret: env.DISCORD_CLIENT_SECRET!,
             scope: ['identify', 'email', 'guilds.join'],
-            redirectURI: `${env.API_URL}/api/auth/discord/callback`,
         },
         reddit: {
             clientId: env.REDDIT_CLIENT_ID!,
             clientSecret: env.REDDIT_CLIENT_SECRET!,
             scope: ['identity', 'flair', 'mysubreddits'],
-            redirectURI: `${env.API_URL}/api/auth/reddit/callback`,
         },
     },
 });
