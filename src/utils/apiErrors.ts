@@ -25,6 +25,11 @@ export const APIErrors = {
             code: 'T1000',
             message: 'The provided date is invalid (cannot be in the future).',
         },
+        dateNotInRange: {
+            code: 'T1006',
+            message:
+                'The provided date is not within the allowed range for entries. It must be within the current year and in November.',
+        },
         entryAlreadyExists: {
             code: 'T1001',
             message:

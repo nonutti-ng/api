@@ -30,6 +30,14 @@ triesRouter.post('/me/log', validateJson(LogDailyTryRequest), async (c) => {
         return c.json(APIErrors.tries.invalidDate, 400);
     }
 
+    // The date must be within the current year, in november.
+    if (
+        dateToUse.getFullYear() !== new Date().getFullYear() ||
+        dateToUse.getMonth() !== 10
+    ) {
+        return c.json(APIErrors.tries.dateNotInRange, 400);
+    }
+
     // If it's a date in the past, check if we DONT have an entry already
     if (date) {
         const existingEntries = await db.entries.getEntriesByTryIdAndDate(
