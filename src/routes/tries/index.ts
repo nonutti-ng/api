@@ -2,7 +2,7 @@ import { validateJson } from '../../middlewares/validation.js';
 import { LogDailyTryRequest } from '../../schemas/tries.js';
 import { createRouter } from '../../utils/index.js';
 import { APIErrors } from '../../utils/apiErrors.js';
-
+import { DateTime } from 'luxon';
 const triesRouter = createRouter(true);
 
 triesRouter.post('/me/log', validateJson(LogDailyTryRequest), async (c) => {
@@ -20,7 +20,8 @@ triesRouter.post('/me/log', validateJson(LogDailyTryRequest), async (c) => {
     }
 
     const tryId = userTries[0].tryId;
-    const dateToUse = date !== undefined ? new Date(date) : new Date();
+    const dateToUse =
+        date !== undefined ? new Date(date) : DateTime.utc().toJSDate();
 
     // The date cannot be in the future
     if (dateToUse > new Date()) {
@@ -32,6 +33,7 @@ triesRouter.post('/me/log', validateJson(LogDailyTryRequest), async (c) => {
         dateToUse.getFullYear() !== new Date().getFullYear() ||
         dateToUse.getMonth() !== 10
     ) {
+        console.log(dateToUse.getFullYear(), dateToUse.getMonth());
         return c.json(APIErrors.tries.dateNotInRange, 400);
     }
 

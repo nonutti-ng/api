@@ -21,11 +21,13 @@
         "id": "^1.0.2",
         "kysely": "^0.28.8",
         "logger": "^0.0.1",
+        "luxon": "^3.7.2",
         "mysql2": "^3.15.3",
         "typescript": "^5.9.3",
         "zod": "^4.1.12"
     },
     "devDependencies": {
+        "@types/luxon": "^3.7.1",
         "drizzle-kit": "^0.31.6",
         "tsx": "^4.20.6"
     }
