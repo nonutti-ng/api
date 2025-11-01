@@ -7,15 +7,10 @@ import logger from './utils/logger.js';
 import { logger as honoLogger } from 'hono/logger';
 import { AppContext } from './types/honoTypes';
 import { apiMainRouter } from './routes/index.js';
-import { ID } from 'id';
 import Database from './db/index.js';
 import { customLogger } from './middlewares/logger.js';
 const app = new Hono<AppContext>();
 const db = new Database();
-const idGen = new ID({
-    username: env!.ID_GEN_USERNAME,
-    token: env!.ID_GEN_PASSWORD,
-});
 
 logger.info(`🚀 Starting server in ${env!.NODE_ENV} mode on port ${env!.PORT}`);
 logger.info('Initializing middleware...');
@@ -24,7 +19,6 @@ app.use(honoLogger(customLogger));
 app.use((c, next) => {
     c.set('db', db);
     c.set('auth', auth);
-    c.set('idGen', idGen);
     return next();
 });
 

@@ -10,7 +10,6 @@ triesRouter.post('/me/log', validateJson(LogDailyTryRequest), async (c) => {
 
     const db = c.get('db');
     const user = c.get('user');
-    const idGen = c.get('idGen');
 
     // Grab the user's try for the current year
     const year = new Date().getFullYear().toString();
@@ -61,7 +60,7 @@ triesRouter.post('/me/log', validateJson(LogDailyTryRequest), async (c) => {
     }
 
     // Generate a UUID for the entry
-    const entryId = (await idGen.generateUUID()).id;
+    const entryId = crypto.randomUUID();
 
     // Create the entry
     await db.entries.addEntryToTry({

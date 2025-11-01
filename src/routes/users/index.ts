@@ -41,8 +41,7 @@ usersRouter.post(
         }
 
         // Generate a UUID for the onboarding entry
-        const id = c.get('idGen');
-        const uuid = (await id.generateUUID()).id;
+        const uuid = crypto.randomUUID();
 
         const onboardObj = await db.users.onboard(user!.id, {
             id: uuid,
@@ -53,7 +52,7 @@ usersRouter.post(
         });
 
         // Create try for this year as well
-        const tryId = (await id.generateUUID()).id;
+        const tryId = crypto.randomUUID();
         const year = new Date().getFullYear().toString();
         await db.tries.create({
             tryId,
@@ -64,7 +63,7 @@ usersRouter.post(
 
         return c.json(
             {
-                statsStartId: id,
+                statsStartId: uuid,
                 tryId,
             },
             201,

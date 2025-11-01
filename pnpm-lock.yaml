@@ -32,9 +32,6 @@ importers:
       hono:
         specifier: ^4.10.3
         version: 4.10.3
-      id:
-        specifier: ^1.0.2
-        version: 1.0.2
       kysely:
         specifier: ^0.28.8
         version: 0.28.8
@@ -739,10 +736,6 @@ packages:
   iconv-lite@0.7.0:
     resolution: {integrity: sha512-cf6L2Ds3h57VVmkZe+Pn+5APsT7FpqJtEhhieDCvrE2MK5Qk9MyffgQyuxQTm6BChfeZNtcOLHp9IcWRVcIcBQ==}
     engines: {node: '>=0.10.0'}
-
-  id@1.0.2:
-    resolution: {integrity: sha512-HVRm4/gwnbWoUw/DIhOwY5E57/+FvPbvvy+oOITUZf4M5IKG3v9U1i6xeCcwhe4bh/DLoQrEhhoOmy522XkjOQ==}
-    engines: {node: '>=20.0.0'}
 
   is-property@1.0.2:
     resolution: {integrity: sha512-Ks/IoX00TtClbGQr4TWXemAnktAQvYB7HzcCxDGqEZU6oCmb2INHuOoKxbtR+HFkmYWBKv/dOZtGRiAjDhj92g==}
@@ -1468,8 +1461,6 @@ snapshots:
   iconv-lite@0.7.0:
     dependencies:
       safer-buffer: 2.1.2
-
-  id@1.0.2: {}
 
   is-property@1.0.2: {}
 
