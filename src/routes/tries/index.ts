@@ -21,21 +21,25 @@ triesRouter.post('/me/log', validateJson(LogDailyTryRequest), async (c) => {
 
     const tryId = userTries[0].tryId;
     const dateToUse =
-        date !== undefined ? new Date(date) : DateTime.utc().toJSDate();
+        date !== undefined
+            ? DateTime.fromISO(date).toJSDate()
+            : DateTime.utc().toJSDate();
 
     // The date cannot be in the future
-    if (dateToUse > new Date()) {
+    if (dateToUse > DateTime.utc().toJSDate()) {
         return c.json(APIErrors.tries.invalidDate, 400);
     }
 
     // The date must be within the current year, in november.
     if (
-        dateToUse.getFullYear() !== new Date().getFullYear() ||
+        dateToUse.getFullYear() !== DateTime.utc().toJSDate().getFullYear() ||
         dateToUse.getMonth() !== 10
     ) {
         console.log(dateToUse.getFullYear(), dateToUse.getMonth());
         return c.json(APIErrors.tries.dateNotInRange, 400);
     }
+
+    console.log('date is valid');
 
     // If it's a date in the past, check if we DONT have an entry already
     if (date) {
