@@ -25,7 +25,7 @@ export const auth = betterAuth({
         discord: {
             clientId: env.DISCORD_CLIENT_ID!,
             clientSecret: env.DISCORD_CLIENT_SECRET!,
-            scope: ['identify', 'email', 'guilds.join'],
+            scope: ['identify', 'email'],
         },
         reddit: {
             clientId: env.REDDIT_CLIENT_ID!,

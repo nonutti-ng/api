@@ -18,6 +18,11 @@ export const APIErrors = {
             code: 'U1000',
             message: 'User has already completed the onboarding process.',
         },
+        redditFetchFailed: {
+            code: 'U1001',
+            message:
+                'Failed to fetch Reddit profile information. This may be due to them not having linked their Reddit account or an internal error.',
+        },
     },
 
     tries: {

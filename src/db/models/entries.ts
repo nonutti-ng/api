@@ -1,6 +1,6 @@
 import { MySql2Database } from 'drizzle-orm/mysql2';
 import * as schema from '../schema.js';
-import { eq, and, inArray, gt } from 'drizzle-orm';
+import { eq, and, inArray, gt, sql } from 'drizzle-orm';
 
 export default class Entries {
     db: MySql2Database<typeof schema>;
@@ -38,6 +38,12 @@ export default class Entries {
     }
 
     getEntriesByTryIdAndDate(authUserId: string, tryId: string, date: Date) {
+        // Compare only the date part (year, month, day) not the full timestamp
+        // This prevents duplicates when timestamps differ but it's the same day
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1; // JS months are 0-indexed
+        const day = date.getDate();
+
         return this.db
             .select()
             .from(schema.entries)
@@ -45,7 +51,9 @@ export default class Entries {
                 and(
                     eq(schema.entries.userId, authUserId),
                     eq(schema.entries.tryId, tryId),
-                    eq(schema.entries.date, date),
+                    sql`YEAR(${schema.entries.date}) = ${year}`,
+                    sql`MONTH(${schema.entries.date}) = ${month}`,
+                    sql`DAY(${schema.entries.date}) = ${day}`,
                 ),
             );
     }

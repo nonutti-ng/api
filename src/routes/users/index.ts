@@ -76,10 +76,14 @@ usersRouter.get('/me/reddit', async (c) => {
     const db = c.get('db');
 
     // Create a reddit client
-    const redditClient = await createRedditClient(user!.id, db);
-    const redditMe = await redditClient.getMe();
+    try {
+        const redditClient = await createRedditClient(user!.id, db);
+        const redditMe = await redditClient.getMe();
 
-    return c.json(redditMe);
+        return c.json(redditMe);
+    } catch (error) {
+        return c.json(APIErrors.users.redditFetchFailed, 404);
+    }
 });
 
 export default usersRouter;

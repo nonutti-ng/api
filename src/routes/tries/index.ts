@@ -41,16 +41,14 @@ triesRouter.post('/me/log', validateJson(LogDailyTryRequest), async (c) => {
     console.log('date is valid');
 
     // If it's a date in the past, check if we DONT have an entry already
-    if (date) {
-        const existingEntries = await db.entries.getEntriesByTryIdAndDate(
-            user!.id,
-            tryId,
-            dateToUse,
-        );
+    const existingEntries = await db.entries.getEntriesByTryIdAndDate(
+        user!.id,
+        tryId,
+        dateToUse,
+    );
 
-        if (existingEntries.length) {
-            return c.json(APIErrors.tries.entryAlreadyExists, 400);
-        }
+    if (existingEntries.length) {
+        return c.json(APIErrors.tries.entryAlreadyExists, 400);
     }
 
     if (status === 'out') {
