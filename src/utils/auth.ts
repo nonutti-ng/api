@@ -2,7 +2,6 @@ import { betterAuth, env } from 'better-auth';
 import { rawDb } from '../db/index.js';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import * as authSchema from '../db/schema.js';
-import { oAuthProxy } from 'better-auth/plugins';
 
 export const auth = betterAuth({
     secret: env.BETTER_AUTH_SECRET,
@@ -19,6 +18,7 @@ export const auth = betterAuth({
         accountLinking: {
             enabled: true,
             allowDifferentEmails: true,
+            trustedProviders: ['discord', 'reddit'],
         },
     },
     socialProviders: {
